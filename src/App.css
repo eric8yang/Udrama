@@ -10,6 +10,6 @@
   flex-direction: row;
   display: flex;
   margin-top: 5vh;
-  margin-left: 1vw;
-  margin-right: 1vw;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -3,7 +3,13 @@ import React from 'react';
 
 function Frame(props){
     return <div className = "container"> 
-        <img className = "image" src ={props.image} alt = {props.name}></img>
+        <div className = "imageViewer">
+            <img className = "image" src ={props.image} alt = {props.name}>
+            </img>
+            <div className = "rate">
+                <div className = "stars"></div>
+            </div>
+        </div>
         <div className = "title">
             {props.name}
         </div>
