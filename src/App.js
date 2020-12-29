@@ -1,7 +1,7 @@
 import './App.css';
 import Frame from './components/Frame.js'
 import React, { useState, useEffect } from 'react'
-import Searchbar from './components/Searchbar.js'
+import Navbar from './components/Navbar.js'
 
 const useFetch = url => {
   const [data, setData] = useState(null);
@@ -67,7 +67,7 @@ function App() {
     
     return (
       <div className="App">
-        <Searchbar />
+        <Navbar />
         {frameData}
       </div>
   

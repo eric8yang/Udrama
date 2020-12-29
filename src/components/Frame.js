@@ -1,7 +1,5 @@
 import './Frame.css';
 import React from 'react';
-import grayStar from '../images/starGray.png';
-import yellowStar from '../images/starYellow.png';
 
 
 
