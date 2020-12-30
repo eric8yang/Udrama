@@ -1,28 +1,26 @@
 import './Frame.css';
 import React from 'react';
 
-
-
 function Frame(props){
     const lightUpStars = (starNumber, name) => {
         for (let i = 1; i <= 5; i++){
-            var elem = document.getElementById("star" + i + name);
+            let elem = document.getElementById("star" + i + name);
             elem.classList.remove("yellowStar");
             elem.classList.remove("grayStar");
         }
 
         for (let i = 1; i <= 5; i++){
             if (i <= starNumber) {
-                var elem = document.getElementById("star" + i + name);   
+                let elem = document.getElementById("star" + i + name);   
                 elem.classList.add("yellowStar");
             }
             else {
-                var elem = document.getElementById("star" + i + name);
+                let elem = document.getElementById("star" + i + name);
                 elem.classList.add("grayStar");
             }
         }
 
-        var rateElem = document.getElementById("rate" + name);
+        let rateElem = document.getElementById("rate" + name);
         rateElem.classList.add("rateStatic");
     }
 
