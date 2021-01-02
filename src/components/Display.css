@@ -6,6 +6,14 @@
     overflow: hidden;
 }
 
+.logo{
+    position: absolute;
+    top: 2vw;
+    left: 4vw;
+    width: 60vw;
+    height: auto;
+}
+
 .mainBackground{
     object-fit: cover;
     width: 100%;
@@ -36,24 +44,24 @@
 
 .titleRectangle{
     position: absolute;
-    top: 35vh;
+    top: 34vh;
     left: 14.5vw;
-    height: 15vh;
+    height: 16vh;
     width: 0.5vw;
-    background-color: #C1D5FB;
+    background-color: white;
 }
 
 .ratingCircle {
     position: absolute;
-    top: 35vh;
+    top: 34vh;
     left: 16vw;
     height: 3.2vh;
     width: 3.2vh;
     border-radius: 50%;
-    border: 0.39vh solid #C1D5FB;
+    border: 0.39vh solid white;
     text-align: center;
     font-size: 2vh;
-    color: #C1D5FB;
+    color: white;
 }
 
 .ratingCircle p{
@@ -65,11 +73,11 @@
 
 .bestMatch{
     position: absolute;
-    top: 36vh;
+    top: 35vh;
     left: 19vw;
     font-size: 2vh;
     letter-spacing: 0.14em;
-    color: #C1D5FB;
+    color: white;
 }
 
 .titleContainer{
@@ -78,7 +86,7 @@
     top: 39vh;
     left: 16vw;
     font-size: 8vh;
-    font-family: 'Lato', sans-serif;
+    font-family: Helvetica Neue;
     color: white;
     line-height: 8vh;
 }
@@ -89,11 +97,11 @@
 }
 
 .textContainer{
-    position: absolute;
-    top: 56.11vh;
-    left: 16vw;
+    margin-top: 56.11vh;
+    margin-left: 16vw;
     font-family: 'Lato', sans-serif;
     width: 50vw;
+    margin-bottom: 10px;
 }
 
 .actors{
@@ -113,9 +121,8 @@
 .buttonContainer{
     display:flex;
     flex-direction: row;
-    position: absolute;
-    top: 78vh;
-    left: 16vw;
+    margin-top: 3vh;
+    margin-left: 16vw;
 }
 
 .buttonContainer button{
@@ -125,6 +132,7 @@
     height: 5vh;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
     margin-right: 1vw;
+    cursor:pointer;
 }
 
 .leftButton{
@@ -151,7 +159,7 @@
 
 .dramaFrame{
     width: 20vw;
-    height: 21vh;
+    height: 21.3vh;
     background: #263139;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.5);
     border-radius: 13px;
@@ -160,13 +168,35 @@
     position: relative;
 }
 
+.imageTitleBackground{
+    position: absolute;
+    background: rgba(38, 49, 57, 0.4);
+    color: white;
+    top: 17vh;
+    height: 5vh;
+    width: 20vw;
+    
+}
+
+.imageTitle{
+    width: 100%;
+    margin-top: 1vh;
+    letter-spacing: 0.2em;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    font-family: Helvetica Neue;
+    font-size: 1.5vh;
+    font-weight: bold;
+    margin-left: 1vw;
+}
+
 .selector{
+    position: absolute;
     top: 0;
     width: 100%;
-    height: 21vh;
+    height: 100%;
     border-radius: 13px;
-    background: rgba(193, 213, 251, 0.7);
-    opacity: 100%;
+    background:rgba(193, 213, 251, 0.7);
+    opacity: 0%;
 }
 
 .selector:hover{
@@ -174,6 +204,23 @@
     cursor: pointer;
 }
 
-.dramaImage{
-    width: 100%;
+.selectorRectangle{
+    position: absolute;
+    top: 5.5vh;
+    left: 18.5vw;
+    height: 10vh;
+    width: 0.4vw;
+    background-color:white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
+
+.selected{
+    opacity: 100%;
+}
+
+.dramaImage{
+    width: 110%;
+    margin-left: 50%;
+    -webkit-transform:  translateX(-50%);
+}
+
