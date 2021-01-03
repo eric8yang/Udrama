@@ -14,7 +14,7 @@ function NavBar(props) {
         <div>
             <div className="topBar">
                 
-                <img className="logo" src={logo} alt="Udrama logo"></img>
+                <img className="logo1" src={logo} alt="Udrama logo"></img>
             </div>
             <div className="bottomBar"></div>
         </div>

@@ -73,12 +73,15 @@ const convertTo1D = (data) => {
 const calculateResults = (data) => {
     let preferences = new Map();
     let unratedDramas = new Map();
+    let unratedDramasInfo = new Map();
     if (data != null){
         data = convertTo1D(data); //convert from 8x6 to 48
         for (let i = 0; i < data.length; i++){ //loop through dramas and add ones rated to preference and ones not rated to dramas
             let score = 0;
             var name = data[i][0];
-            var genres = data[i][1].split(" ").join("").split(',') //removes spaces, then separate list of genres into array
+            var genres = data[i][1].split(" ").join("").split(','); //removes spaces, then separate list of genres into array
+            var description = data[i][2];
+            var actors = data[i][3];
             var currRating = document.getElementById('rate' + name);
             if (currRating.classList.contains("rateStatic")){
                 var stars = countStars(name);
@@ -102,6 +105,7 @@ const calculateResults = (data) => {
             }
             else {
                 unratedDramas.set(name, genres);
+                unratedDramasInfo.set(name, [actors, description]);
             }
         } 
 
@@ -117,15 +121,28 @@ const calculateResults = (data) => {
                     score += prefScore[0];
                 }
             }
-            dramaArray[i][1] = score/count; //normalize score in the end
+            if (count !== 0){
+                dramaArray[i][1] = score/count; //normalize score in the end
+            }
+            else {
+                dramaArray[i][1] = 0;
+            }
+
         }
 
         dramaArray.sort(sortFun); //sort by score in descending order
-        let finalRecs = new Array(4);
+        console.log(dramaArray);
+        
+        let finalRecs = new Array(4)
         for (let i = 0; i < 4; i++){ //take top 5
-            finalRecs[i] = dramaArray[i][0];
+            let dramaName = dramaArray[i][0];
+            let dramaInfo = unratedDramasInfo.get(dramaName);
+            sessionStorage.setItem(dramaName + " actors", dramaInfo[0]);
+            sessionStorage.setItem(dramaName + " info", dramaInfo[1]);
+            finalRecs[i] = dramaName;
         }
-        console.log(finalRecs);
+        sessionStorage.setItem("recs", finalRecs)
+        
     }
 }
 
@@ -153,12 +170,16 @@ const countStars = (name) => {
 }
 
 function Home() {
-    const { data } = useFetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTGyDDhDVVwIny-eqm4Rl5AbpaVrpQ0p9jDg_9pWwsAZ5C4wDKDBce9Itf7w3qNhKtAa0NEuw45RNHB/pub?output=tsv")
+    const { data } = useFetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTGyDDhDVVwIny-eqm4Rl5AbpaVrpQ0p9jDg_9pWwsAZ5C4wDKDBce9Itf7w3qNhKtAa0NEuw45RNHB/pub?output=tsv");
+    sessionStorage.setItem("dramaData", data);
     if (data != null) {
         frameData = data.map(x => x.map(y => <Frame name={y[0]} year={y[4]} image={require('../images/' + y[0] + '.jpg').default} />))
         frameData = frameData.map(x => <div className="Row">{x}</div>)
 
-        
+        /*
+            
+            
+        */
         
         return (
             <div className="Home">
