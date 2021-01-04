@@ -130,21 +130,57 @@
     border: none;
     width: 9vw;
     height: 5vh;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     margin-right: 1vw;
     cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
 
-.leftButton{
-    background: #181E22;
+.transparent{
+    opacity: 0;
+    pointer-events:none;
 }
 
-.leftButton{
-    background: #181E22;
+.Netflix{
+    background-color: rgba(24, 30, 34, 1);
 }
 
-.leftButton{
-    background: #181E22;
+.NetflixImage{
+    height: 5vh;
+}
+
+.Viki{
+    background: #E5E5E5;
+}
+
+.VikiImage{
+    margin-top: 0.5vh;
+    height: 2.5vh;
+}
+
+.Kocowa{
+    background: #E5E5E5;
+}
+
+.KocowaImage{
+    height: 4vh;
+}
+
+.Hulu{
+    background: #55B180;
+}
+
+.HuluImage{
+    height: 5vh;
+}
+
+.Prime{
+    background: #E5E5E5;
+}
+
+.PrimeImage{
+    height: 4vh;
 }
 
 .homeButton{

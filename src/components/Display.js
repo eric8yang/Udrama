@@ -3,22 +3,32 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images_h/udramalogo.png';
 
-
 const fetchResults = () => {
-    let dramaRecs = sessionStorage.getItem("recs").split(",");
+    let dramaRecs = sessionStorage.getItem("recs").split(","); //gets all the drama names
 
-    let formattedDramas = new Array(4);
+    let formattedDramas = new Array(4); //makes new array which ends up being 4x4
     for (let i = 0; i < 4; i++) {
-        var dramaName = dramaRecs[i];
-        var dramaActors = sessionStorage.getItem(dramaName + " actors");
-        var dramaInfo = sessionStorage.getItem(dramaName + " info");
+        var dramaName = dramaRecs[i]; //first element is name of drama
+        var dramaActors = sessionStorage.getItem(dramaName + " actors"); //second element is actors in drama
+        var dramaInfo = sessionStorage.getItem(dramaName + " info"); //third element is info on drama
         formattedDramas[i] = [dramaName, dramaActors, dramaInfo];
     }
     return formattedDramas;
 }
 
-const updatePage = (numDrama, dramaData) => {
-    
+const fetchLinks = resultNames => { //pass in list of full drama data
+    let linksMap = new Map();
+    if (resultNames !== null){
+        for (let i = 0; i < 4; i++){
+            var dramaName = resultNames[i][0];
+            var linksArray = sessionStorage.getItem(dramaName + "links");
+            linksMap.set(dramaName, linksArray);
+        }
+    }
+    return linksMap;
+}
+
+const updatePage = (numDrama, dramaData, linksMap) => {
     let currDramaNum = document.getElementById("ratingNumber").innerHTML.charAt(1);
     if (currDramaNum !== numDrama) {
         let [name, actors, synopsis] = dramaData[numDrama - 1];
@@ -37,12 +47,129 @@ const updatePage = (numDrama, dramaData) => {
                 selector.classList.add("selected");
             }
         }
+        
+        var linksArray = linksMap.get(name).split(",");
+        var length = linksArray.length;
+        if (length === 2){
+            let button1 = document.getElementById("button1");
+            button1.className = linksArray[0];
+            button1.onclick = () => redirect(linksArray[1]);
+            let image1 = document.getElementById("buttonImage1");
+            image1.className = linksArray[0] + "Image";
+            image1.src = require('../button/' + linksArray[0] + '.png').default;
+
+            let button2 = document.getElementById("button2");
+            button2.className = "transparent";
+            let image2 = document.getElementById("buttonImage2");
+            image2.className = "transparent";
+
+            let button3 = document.getElementById("button3");
+            button3.className = "transparent";
+            let image3 = document.getElementById("buttonImage3");
+            image3.className = "transparent";
+        }
+
+        if (length === 4){
+            let button1 = document.getElementById("button1");
+            button1.className = linksArray[0];
+            button1.onclick = () => redirect(linksArray[1]);
+            let image1 = document.getElementById("buttonImage1");
+            image1.className = linksArray[0] + "Image";
+            image1.src = require('../button/' + linksArray[0] + '.png').default;
+
+            let button2 = document.getElementById("button2");
+            button2.className = linksArray[2];
+            button2.onclick = () => redirect(linksArray[3]);
+            let image2 = document.getElementById("buttonImage2");
+            image2.className = linksArray[2] + "Image";
+            image2.src = require('../button/' + linksArray[2] + '.png').default;
+
+            let button3 = document.getElementById("button3");
+            button3.className = "transparent";
+            let image3 = document.getElementById("buttonImage3");
+            image3.className = "transparent";
+        }
+
+        if (length === 6){
+            let button1 = document.getElementById("button1");
+            button1.className = linksArray[0];
+            button1.onclick = () => redirect(linksArray[1]);
+            let image1 = document.getElementById("buttonImage1");
+            image1.className = linksArray[0] + "Image";
+            image1.src = require('../button/' + linksArray[0] + '.png').default;
+
+            let button2 = document.getElementById("button2");
+            button2.className = linksArray[2];
+            button2.onclick = () => redirect(linksArray[3]);
+            let image2 = document.getElementById("buttonImage2");
+            image2.className = linksArray[2] + "Image";
+            image2.src = require('../button/' + linksArray[2] + '.png').default;
+
+            let button3 = document.getElementById("button3");
+            button3.className = linksArray[4];
+            button3.onclick = () => redirect(linksArray[5]);
+            let image3 = document.getElementById("buttonImage3");
+            image3.className = linksArray[4] + "Image";
+            image3.src = require('../button/' + linksArray[4] + '.png').default;
+        }
+    }
+}
+
+const redirect = (link) => {
+    window.open(link)
+}
+
+const getButtons = (name, linksMap) => {
+    var linksArray = linksMap.get(name).split(",");
+    var length = linksArray.length;
+    if (length === 2){
+        return(<div id="buttonContainer" className="buttonContainer">
+        <button id="button1" className={linksArray[0]} onClick={() => redirect(linksArray[1])}>
+            <img id="buttonImage1" className={linksArray[0]+ "Image"}  src={require('../button/' + linksArray[0] + '.png').default} alt="firstButton"></img>
+        </button>
+        <button id="button2" className="transparent" onClick={() => redirect(linksArray[3])}>
+            <img id="buttonImage2" className="transparent"  src="" alt="secondButton"></img>
+        </button>
+        <button id="button3" className="transparent" onClick={() => redirect(linksArray[5])}>
+            <img id="buttonImage3" className="transparent"   src="" alt="thirdButton"></img>
+        </button>
+        </div>)
     }
 
+    if (length === 4){
+        return(<div id="buttonContainer" className="buttonContainer">
+        <button id="button1" className={linksArray[0]} onClick={() => redirect(1, linksArray)}>
+            <img id="buttonImage1" className={linksArray[0]+ "Image"}  src={require('../button/' + linksArray[0] + '.png').default} alt="firstButton"></img>
+        </button>
+        <button id="button2" className={linksArray[2]} onClick={() => redirect(2, linksArray)}>
+            <img id="buttonImage2" className={linksArray[2]+ "Image"}  src={require('../button/' + linksArray[2] + '.png').default} alt="secondButton"></img>
+        </button>
+        <button id="button3" className="transparent" onClick={() => redirect(3, linksArray)}>
+            <img id="buttonImage3" className="transparent"   src="" alt="thirdButton"></img>
+        </button>
+        </div>)
+    }
+
+    else{
+        return(<div id="buttonContainer" className="buttonContainer">
+        <button id="button1" className={linksArray[0]} onClick={() => redirect(1, linksArray)}>
+            <img id="buttonImage1" className={linksArray[0]+ "Image"}  src={require('../button/' + linksArray[0] + '.png').default} alt="firstButton"></img>
+        </button>
+        <button id="button2" className={linksArray[2]} onClick={() => redirect(2, linksArray)}>
+            <img id="buttonImage2" className={linksArray[2]+ "Image"}  src={require('../button/' + linksArray[2] + '.png').default} alt="firstButton"></img>
+        </button>
+        <button id="button3" className={linksArray[4]} onClick={() => redirect(3, linksArray)}>
+            <img id="buttonImage3" className={linksArray[4]+ "Image"}  src={require('../button/' + linksArray[4] + '.png').default} alt="thirdButton"></img>
+        </button>
+        </div>)
+    }
 }
+
 
 function Display() {
     let dramaRecs = fetchResults();
+    let linkData = fetchLinks(dramaRecs);
+    var buttonContainer = getButtons(dramaRecs[0][0], linkData);
     return (
         <div className="mainContainer">
             <img id="mainBackground" className="mainBackground" src={require('../images_h/' + dramaRecs[0][0] + '_h.jpg').default} alt="dramaBackground"/>
@@ -63,12 +190,8 @@ function Display() {
                     <p className="actors" id="dramaActors">{dramaRecs[0][1]}</p>
                     <p className="synopsis" id="dramaSynopsis">{dramaRecs[0][2]}</p>
                 </div>
-
-                <div className="buttonContainer">
-                    <button>netflix</button>
-                    <button>dramacool</button>
-                    <button>viki</button>
-                </div>
+                {buttonContainer}
+                
             </div>
             <div className="rightContainer">
                 <Link to="/">
@@ -77,7 +200,7 @@ function Display() {
                 <div className="listContainer">
                     <div className="dramaFrame">
                         <img id="dramaImage1" className="dramaImage" src={require('../images_h/' + dramaRecs[0][0] + '_h.jpg').default} alt="firstRec"/>
-                        <button id="dramaSelector1" className="selector selected" onClick={() => updatePage(1, dramaRecs)}>
+                        <button id="dramaSelector1" className="selector selected" onClick={() => updatePage(1, dramaRecs, linkData)}>
                             <div className="selectorRectangle"/>
                         </button>
                         <div className="imageTitleBackground">
@@ -86,7 +209,7 @@ function Display() {
                     </div>
                     <div className="dramaFrame">
                         <img id="dramaImage2" className="dramaImage" src={require('../images_h/' + dramaRecs[1][0] + '_h.jpg').default} alt="secondRec"/>
-                        <button id="dramaSelector2" className="selector" onClick={() => updatePage(2, dramaRecs)}>
+                        <button id="dramaSelector2" className="selector" onClick={() => updatePage(2, dramaRecs, linkData)}>
                             <div className="selectorRectangle"/>
                         </button>
                         <div className="imageTitleBackground">
@@ -95,7 +218,7 @@ function Display() {
                     </div>
                     <div className="dramaFrame">
                         <img id="dramaImage3" className="dramaImage" src={require('../images_h/' + dramaRecs[2][0] + '_h.jpg').default} alt="thirdRec"></img>
-                        <button id="dramaSelector3" className="selector" onClick={() => updatePage(3, dramaRecs)}>
+                        <button id="dramaSelector3" className="selector" onClick={() => updatePage(3, dramaRecs, linkData)}>
                             <div className="selectorRectangle"/>
                         </button>
                         <div className="imageTitleBackground">
@@ -104,7 +227,7 @@ function Display() {
                     </div>
                     <div className="dramaFrame">
                         <img id="dramaImage4" className="dramaImage" src={require('../images_h/' + dramaRecs[3][0] + '_h.jpg').default} alt="fourthRec"></img>
-                        <button id="dramaSelector4" className="selector" onClick={() => updatePage(4, dramaRecs)}>
+                        <button id="dramaSelector4" className="selector" onClick={() => updatePage(4, dramaRecs, linkData)}>
                             <div className="selectorRectangle"/>
                         </button>
                         <div className="imageTitleBackground">

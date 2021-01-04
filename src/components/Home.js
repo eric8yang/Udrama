@@ -4,9 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar.js'
 import { Link } from 'react-router-dom';
 
-var frameData;
-
-const useFetch = url => {
+const useFetchDramas = url => {
     const [data, setData] = useState(null);
     useEffect(() => {
         var xhttp = new XMLHttpRequest()
@@ -16,7 +14,7 @@ const useFetch = url => {
 
                 var betterArray = new Array(250)
                 var currIndex = 0;
-                for (let i = 0; i < 201; i++) {
+                for (let i = 0; i < 193; i++) {
                     var currString = arrayWithValues[i];
                     var index = currString.indexOf("\n")
                     if (index !== -1) {
@@ -57,7 +55,64 @@ const useFetch = url => {
         xhttp.send();
     }, [url]);
 
-    return { data };
+    return data;
+}
+
+const useFetchLinks = url => {
+    const [linkData, setLinkData] = useState(null);
+    useEffect(() => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                var arrayWithValues = xhttp.responseText.trim().split('\t');
+                var betterArray = new Array(250)
+                var currIndex = 0;
+                for (let i = 0; i < 191; i++) {
+                    var currString = arrayWithValues[i];
+                    var index = currString.indexOf("\n")
+                    if (index !== -1) {
+                        var firstPart = currString.substring(0, index);
+                        var secondPart = currString.substring(index + 1);
+                        betterArray[currIndex] = firstPart;
+                        currIndex++;
+                        betterArray[currIndex] = secondPart;
+                    }
+                    else {
+                        betterArray[currIndex] = arrayWithValues[i];
+                    }
+                    currIndex++;
+                }
+
+                let spreadsheet = new Array(48)
+                for (let i = 0; i < 48; i++) {
+                    var currRow = new Array(5);
+                    for (let j = 0; j < 5; j++) {
+                        currRow[j] = betterArray[i * 5 + j];
+                    }
+                    spreadsheet[i] = currRow;
+                }
+                
+                for (let i = 0; i < 48; i++){
+                    let currRow = spreadsheet[i];
+                    var sites = currRow[1].split(" ").join("").split(",");
+                    if (sites.length === 1){
+                        sessionStorage.setItem(currRow[0] + "links", [sites[0], currRow[2]]);
+                    }
+                    else if (sites.length === 2){
+                        sessionStorage.setItem(currRow[0] + "links", [sites[0], currRow[2], sites[1], currRow[3]]);
+                    }
+                    else {
+                        sessionStorage.setItem(currRow[0] + "links", [sites[0], currRow[2], sites[1], currRow[3], sites[2], currRow[4]]);
+                    }
+                }
+                setLinkData(spreadsheet);
+                console.log("links set");
+            };
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }, [url]);
+    return linkData;
 }
 
 const convertTo1D = (data) => {
@@ -131,7 +186,6 @@ const calculateResults = (data) => {
         }
 
         dramaArray.sort(sortFun); //sort by score in descending order
-        console.log(dramaArray);
         
         let finalRecs = new Array(4)
         for (let i = 0; i < 4; i++){ //take top 5
@@ -170,16 +224,13 @@ const countStars = (name) => {
 }
 
 function Home() {
-    const { data } = useFetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTGyDDhDVVwIny-eqm4Rl5AbpaVrpQ0p9jDg_9pWwsAZ5C4wDKDBce9Itf7w3qNhKtAa0NEuw45RNHB/pub?output=tsv");
+    const data = useFetchDramas("https://docs.google.com/spreadsheets/d/e/2PACX-1vTGyDDhDVVwIny-eqm4Rl5AbpaVrpQ0p9jDg_9pWwsAZ5C4wDKDBce9Itf7w3qNhKtAa0NEuw45RNHB/pub?output=tsv");
+    const links = useFetchLinks("https://docs.google.com/spreadsheets/d/e/2PACX-1vTv_Ick-6MBeEArH8EYUl3Whsd80S4h9Ad3eCoK8FITVabEV2dhI4IfMANuBL5CLSVFxonzuJMoxZL5/pub?output=tsv");
+    sessionStorage.setItem("linkData", links);
     sessionStorage.setItem("dramaData", data);
     if (data != null) {
-        frameData = data.map(x => x.map(y => <Frame name={y[0]} year={y[4]} image={require('../images/' + y[0] + '.jpg').default} />))
+        var frameData = data.map(x => x.map(y => <Frame name={y[0]} year={y[4]} image={require('../images/' + y[0] + '.jpg').default} />))
         frameData = frameData.map(x => <div className="Row">{x}</div>)
-
-        /*
-            
-            
-        */
         
         return (
             <div className="Home">
