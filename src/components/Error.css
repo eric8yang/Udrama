@@ -1,0 +1,143 @@
+.topContainer{
+    background: #263139;
+    height: 80vh;
+    width: 100vw;
+
+}
+
+.errorPageLogo{
+    position: absolute;
+    top: 4vh;
+    left: 5.5vw;
+    width: 16vw;
+
+}
+
+.middleContainer{
+    position: absolute;
+    color: white;
+    top: 34.47vh;
+    left: 18.89vw;
+    width: 65vw;
+    height: auto;
+
+}
+
+.errorMessage{
+    font-family: Helvetica Neue;
+    font-weight: bold;
+    font-size: 5.07vh;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.errorBody{
+    font-family: Lato;
+    font-size: 2.5vh;
+    line-height: 3.29vh;
+    opacity: 90%;
+    width: 56.94vw;
+}
+
+.buttonHome{
+    position: absolute;
+    width: 11.5vw;
+    z-index: 900;
+    height: 5.6vh;
+    background: #FADD8F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 10vh;
+    margin-top: 4.1vh;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5vh;
+    letter-spacing: 0.14em;    
+    color: white;
+    border: none;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.backgroundNumbers{
+    position: absolute;
+    width: 1581px;
+    height: 374px;
+    left: -23.2vw;
+    top: -57.8vh;
+    font-family: Helvetica Neue;
+    font-weight: bold;
+    font-size: 57vh;
+    line-height: 50.6vh;
+    text-align: center;
+    letter-spacing: 0.14em;
+    color: #35414C;
+
+    
+}
+.bottomContainer{
+    height: 20vh;
+    width: 100vw;
+    background: #546273;
+    color: white;
+
+
+}
+
+.rectangle{
+    position: absolute;
+    width: 1440px;
+    height: 161px;
+    left: 0px;
+    top: 79.6vh;
+
+background: #546273;
+}
+.email{
+    position: absolute;
+    width: 8.5vw;
+    left: 8.2vw;
+    margin-top: 3.3vh;
+    font-family: Lato;
+    font-weight: lighter;
+    font-size: 1.5vh;
+    opacity: 90%;
+    
+}
+
+.emailName{
+    position: absolute;
+    left: 16.4vw;
+    margin-top: 3.3vh;
+    font-family: Lato;
+    font-weight: bold;
+    font-size: 1.5vh;
+    opacity: 80%;
+    color: #FADD8F;
+
+}
+
+.aboutHeader{
+    position: absolute;
+    margin-top: 3.3vh;
+    height: 3.5vh;
+    left: 56.7vw;
+    font-family: Lato;
+    font-weight: bold;
+    font-size: 1.5vh;
+    line-height: 3.5vh;
+    letter-spacing: 0.14em;
+
+}
+
+.aboutText{
+    position: absolute;
+    margin-top: 6.8vh;
+    width: 38.1vw;
+    left: 56.7vw;
+    font-family: Lato;
+    font-weight: lighter;
+    font-size: 1.5vh;
+    line-height: 1.8vh;
+    opacity: 80%;
+}
