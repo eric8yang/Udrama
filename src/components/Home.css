@@ -30,4 +30,14 @@
     color: white;
     border: none;
 }
-  
+
+.topIntro{
+    height: 80vh;
+    overflow: hidden;
+    position:relative;
+}
+
+.topBackground{
+    width: 100%;
+}
+

@@ -138,13 +138,13 @@ const getButtons = (name, linksMap) => {
 
     if (length === 4){
         return(<div id="buttonContainer" className="buttonContainer">
-        <button id="button1" className={linksArray[0]} onClick={() => redirect(1, linksArray)}>
+        <button id="button1" className={linksArray[0]} onClick={() => redirect(linksArray[1])}>
             <img id="buttonImage1" className={linksArray[0]+ "Image"}  src={require('../button/' + linksArray[0] + '.png').default} alt="firstButton"></img>
         </button>
-        <button id="button2" className={linksArray[2]} onClick={() => redirect(2, linksArray)}>
+        <button id="button2" className={linksArray[2]} onClick={() => redirect(linksArray[3])}>
             <img id="buttonImage2" className={linksArray[2]+ "Image"}  src={require('../button/' + linksArray[2] + '.png').default} alt="secondButton"></img>
         </button>
-        <button id="button3" className="transparent" onClick={() => redirect(3, linksArray)}>
+        <button id="button3" className="transparent" onClick={() => redirect(linksArray[5])}>
             <img id="buttonImage3" className="transparent"   src="" alt="thirdButton"></img>
         </button>
         </div>)
@@ -152,13 +152,13 @@ const getButtons = (name, linksMap) => {
 
     else{
         return(<div id="buttonContainer" className="buttonContainer">
-        <button id="button1" className={linksArray[0]} onClick={() => redirect(1, linksArray)}>
+        <button id="button1" className={linksArray[0]} onClick={() => redirect(linksArray[1])}>
             <img id="buttonImage1" className={linksArray[0]+ "Image"}  src={require('../button/' + linksArray[0] + '.png').default} alt="firstButton"></img>
         </button>
-        <button id="button2" className={linksArray[2]} onClick={() => redirect(2, linksArray)}>
+        <button id="button2" className={linksArray[2]} onClick={() => redirect(linksArray[3])}>
             <img id="buttonImage2" className={linksArray[2]+ "Image"}  src={require('../button/' + linksArray[2] + '.png').default} alt="firstButton"></img>
         </button>
-        <button id="button3" className={linksArray[4]} onClick={() => redirect(3, linksArray)}>
+        <button id="button3" className={linksArray[4]} onClick={() => redirect(linksArray[5])}>
             <img id="buttonImage3" className={linksArray[4]+ "Image"}  src={require('../button/' + linksArray[4] + '.png').default} alt="thirdButton"></img>
         </button>
         </div>)

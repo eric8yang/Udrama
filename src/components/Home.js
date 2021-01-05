@@ -1,8 +1,8 @@
 import './Home.css';
 import Frame from './Frame.js'
 import React, { useState, useEffect } from 'react'
-import Navbar from './Navbar.js'
 import { Link } from 'react-router-dom';
+import logo from '../images_h/udramalogo.png'
 
 const useFetchDramas = url => {
     const [data, setData] = useState(null);
@@ -234,7 +234,10 @@ function Home() {
         
         return (
             <div className="Home">
-                <Navbar />
+                <div className="topIntro">
+                    <img className="topBackground" src={require('../images_h/Goblin_h.jpg').default} alt="goblin background" />
+                    <img className="logo" src={logo} alt="UDrama Logo"/>
+                </div>
                 {frameData}
                 <Link className="buttonGenerate" to="/results">
                     <button className="buttonGenerate" onClick={() => calculateResults(data)}>GENERATE</button>
@@ -245,7 +248,6 @@ function Home() {
     else {
         return (
             <div className="Home">
-                <Navbar />
                 <div className="Loading"></div>
             </div>
         );

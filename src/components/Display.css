@@ -10,7 +10,7 @@
     position: absolute;
     top: 4vh;
     left: 5.5vw;
-    width: 20vw;
+    width: 14vw;
     cursor: pointer;
 }
 
@@ -164,7 +164,7 @@
 }
 
 .KocowaImage{
-    height: 4vh;
+    height: 3.3vh;
 }
 
 .Hulu{
@@ -180,7 +180,7 @@
 }
 
 .PrimeImage{
-    height: 4vh;
+    height: 3vh;
 }
 
 .homeButton{
